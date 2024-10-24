@@ -1,6 +1,10 @@
 import React from 'react'
+import { useLocation } from 'react-router-dom'
 
-const SearchPage = () => {
+function SearchPage() {
+  const location = useLocation()
+  console.log("location", location)
+
   return (
     <div>
       search
@@ -9,3 +13,4 @@ const SearchPage = () => {
 }
 
 export default SearchPage;
+
