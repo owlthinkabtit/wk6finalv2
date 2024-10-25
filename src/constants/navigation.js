@@ -2,6 +2,7 @@ import React from 'react';
 import { MdHomeFilled } from 'react-icons/md';
 import { PiTelevisionDuotone } from "react-icons/pi";
 import { TbMovie } from "react-icons/tb";
+import { IoSearchOutline } from 'react-icons/io5';
 
 
 export const navigation = [
@@ -23,5 +24,10 @@ export const navigation = [
       href: "/",
       icon: <MdHomeFilled />
     },
-    ...navigation
+    ...navigation, 
+    {
+      label: "search",
+      href: "/search",
+      icon: <IoSearchOutline />
+    }
   ]
