@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import mplogo from '../assets/mplogo.svg'
+import moviepixtextlogo from '../assets/moviepixtextlogo.svg'
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import people from '../assets/people.png';
 import { IoSearchOutline } from 'react-icons/io5';
@@ -23,11 +23,11 @@ function Header() {
 
 
   return (
-    <header className='fixed top-0 w-full h-16 bg-blue-950 bg-opacity-75'>
+    <header className='fixed top-0 w-full h-16 bg-blue-950 bg-opacity-75 z-40'>
       <div className='container mx-auto px-3 flex items-center h-full'>
         <Link to={"/"}>
           <img
-            src={mplogo}
+            src={moviepixtextlogo}
             alt='logo'
             width={186}
           />
