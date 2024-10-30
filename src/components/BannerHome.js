@@ -1,14 +1,32 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { FaAngleRight, FaAngleLeft } from "react-icons/fa6";
+import Genres from '../store/Genres';
+
 
 
 const BannerHome = () => {
   const bannerData = useSelector(state => state.moviepixData.bannerData)
   const imageURL = useSelector(state => state.moviepixData.imageURL)
   const [currentImg, setCurrentImg] = useState(0)
-  
+
   const handleNext = () => {
+    setCurrentImg(prev => (prev + 1) % bannerData.length)
+  }
+  
+  const handlePrev = () => {
+    setCurrentImg(prev => (prev - 1 + bannerData.length) % bannerData.length)
+  }
+  
+  useEffect(() => {
+    const interval = setInterval(() => {
+      handleNext()
+    }, 5000)
+  
+    return () => clearInterval(interval)
+  }, [bannerData, imageURL])
+  
+  {/*const handleNext = () => {
     if(currentImg < bannerData.length - 1) {
       setCurrentImg(preve => preve + 1)
     }
@@ -18,6 +36,21 @@ const BannerHome = () => {
       setCurrentImg(preve => preve - 1)
     }
   }
+
+  useEffect(() => {
+    const interval = setInterval (() => {
+      if(currentImg < bannerData.length - 1) {
+        handleNext()
+      }
+      else {
+        setCurrentImg(0)
+      }
+
+    }, 5000)
+
+    return () => clearInterval(interval)
+  }, [bannerData, imageURL])
+  */}
 
   return (
     <section className='w-full h-full'>
@@ -46,8 +79,8 @@ const BannerHome = () => {
                 </div>
                 <div className='container mx-auto'>
                   <div className='w-full absolute bottom-0 max-w-md px-3 text-slate-300'>
-                    <h2 className='font-bold text-2xl lg:text-4xl text-white drop-shadow-2xl'>{data.title}</h2>
-                    <h6 className='flex item-center gap-4'>rating<span>&bull;</span>genre<span>&bull;</span>runtime</h6>{/* going to have the genre and runtime display here*/}
+                    <h2 className='font-bold text-2xl lg:text-4xl text-white drop-shadow-2xl'>{data?.title || data?.name}</h2>
+                    <h6 className='flex item-center gap-4'><Genres /><span>&bull;</span>runtime</h6>{/* going to have the genre and runtime display here*/}
                     <p className='text-ellipsis line-clamp-3 my-2'>{data.overview}</p>
                     <div className='flex item-center gap-4'>
                       <p>Rating: {data.vote_average.toFixed(1)}</p>
