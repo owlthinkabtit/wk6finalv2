@@ -8,7 +8,7 @@ const Genres = () => {
     const fetchGenres = async () => {
       try {
         const response = await axios.get(
-          `https://api.themoviedb.org/3/genre/movie/list?api_key=8286b6390cb7e70d35486355cf608d8d`
+          `https://api.themoviedb.org/3/genre/movie/list?api_key=${process.env.REACT_APP_ACCESS_TOKEN}`
         );
         setGenres(response.data.genres);
       } catch (error) {
