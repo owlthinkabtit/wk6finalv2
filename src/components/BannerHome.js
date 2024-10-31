@@ -57,9 +57,8 @@ const BannerHome = () => {
       <div className='flex min-h-full max-h-[95vh] overflow-hidden'>
         {
           bannerData.map((data, index) => {
-            console.log("data", data)
             return (
-              <div className='min-w-full min-h-[450px] lg:min-h-full overflow-hidden relative group transition-all' style={{transform:`translateX(-${currentImg * 100}%)`}}>
+              <div className='min-w-full min-h-[450px] lg:min-h-full overflow-hidden relative group transition-all' key={data.id+"bannerHome"+index} style={{transform:`translateX(-${currentImg * 100}%)`}}>
                 <div className='w-full h-full'>
                   <img
                     src={imageURL + data.backdrop_path}
