@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 const Card = ({data, trending, index}) => {
   const imageURL = useSelector(state => state.moviepixData.imageURL)
   return (
-    <Link to={"/"+data.media_type+"/"+data.id} className='w-full min-w-[230px] max-w-[230px] h-80 overflow-hidden rounded relative'>
+    <Link to={"/"+data.media_type+"/"+data.id} className='w-full min-w-[230px] max-w-[230px] h-80 overflow-hidden block rounded relative hover:scale-105 transition-all'>
       <img
         src={imageURL+data?.poster_path}
       />
