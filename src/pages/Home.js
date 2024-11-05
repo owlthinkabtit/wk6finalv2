@@ -15,9 +15,9 @@ const Home = () => {
     <div>
       <BannerHome />
       <XscrollCard data={trendingData} heading={"Trending"} trending={true}/>
-      <XscrollCard data={nowPlayingData} heading={"Now Playing in Theaters"}/>
-      <XscrollCard data={tvTrendingData} heading={"Trending Shows This Week"}/>
-      <XscrollCard data={onAirData} heading={"New This Week"}/>
+      <XscrollCard data={nowPlayingData} heading={"Now Playing in Theaters"} media_type={"movie"}/>
+      <XscrollCard data={tvTrendingData} heading={"Trending Shows This Week"} media_type={"tv"}/>
+      <XscrollCard data={onAirData} heading={"New This Week"} media_type={"tv"}/>
     </div>
   );
 };
