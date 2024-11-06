@@ -33,7 +33,7 @@ function Header() {
           <img
             src={moviepixtextlogo}
             alt='logo'
-            width={186}
+            width={138}
           />
         </Link>
         <nav className='hidden lg:flex items-center gap-1 ml-5 text-neutral-300'>
