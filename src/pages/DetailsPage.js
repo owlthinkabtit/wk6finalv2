@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import useFetchDetails from '../hooks/useFetchDetails';
 import { useSelector } from 'react-redux';
@@ -10,6 +10,8 @@ import axios from 'axios';
 import CastScroll from '../components/CastScroll';
 import useFetch from '../hooks/useFetch'
 import XscrollCard from '../components/XscrollCard';
+import Video from '../components/Video';
+
 
 
 const DetailsPage = () => {
@@ -20,10 +22,13 @@ const DetailsPage = () => {
   const { data :RecData} = useFetch(`/${params?.explore}/${params?.id}/recommendations`)
   const directors = castData?.crew?.filter(member => member.job === "Director");
   const writers = castData?.crew?.filter(member => member.job === "Writer" || member.job === "Screenplay" || member.job === "Author" || member.job === "Staff Writer" || member.job === "Original Concept");
+  const [playVideo, setPlayVideo] = useState(false)
+  const [videoId, setVideoId] = useState("")
+  const handlePlayVideo = (data) => {
+    setVideoId(data)
+    setPlayVideo(true)
+  }
 
-
-
-  console.log("star cast", castData)
 
   return (
     <div>
@@ -36,6 +41,7 @@ const DetailsPage = () => {
       <div className='container mx-auto px-3 py-16 lg:py-0 flex flex-col lg:flex-row gap-5 lg:gap-10'>
         <div className='relative mx-auto lg:-mt-28 lg:mx-0 w-fit min-w-60'>
           <img src={imageURL + data?.poster_path} className='h-80 w-60 object-cover rounded-xl' alt={data?.title || data?.name} />
+          <button onClick={()=>handlePlayVideo(data)}className='mt-3 w-full py-2 px-4 text-center bg-sky-700 text-white rounded font-bold text-lg hover:bg-gradient-to-l from-red-500 to-orange-500 hover:scale-105 transition-all'>View Trailer</button>
         </div>
         <div>
           <h2 className='text-2xl lg:text-4xl font-bold text-white'>{data?.title || data?.name}</h2>
@@ -72,6 +78,12 @@ const DetailsPage = () => {
         <CastScroll castData={castData?.cast} />
         <XscrollCard data={RecData} heading={"Recommonded "+params?.explore} />
       </div>
+      {
+        playVideo && (
+          <Video data={videoId} close={()=>setPlayVideo(false)} media_type={params?.explore}/>
+
+        )
+      }
     </div>
   );
 }

@@ -3,12 +3,15 @@ import { useSelector } from 'react-redux'
 import { FaAngleRight, FaAngleLeft } from "react-icons/fa6";
 import moment from 'moment';
 import axios from 'axios';
+import Video from './Video';
 
 const BannerHome = () => {
   const bannerData = useSelector(state => state.moviepixData.bannerData)
   const imageURL = useSelector(state => state.moviepixData.imageURL)
   const [currentImg, setCurrentImg] = useState(0)
   const [genres, setGenres] = useState([])
+  const [showTrailer, setShowTrailer] = useState(false);
+  const [selectedData, setSelectedData] = useState(null);
 
   useEffect(() => {
     
@@ -47,6 +50,11 @@ const BannerHome = () => {
   
     return () => clearInterval(interval)
   }, [bannerData, imageURL])
+
+  const handleViewTrailer = (data) => {
+    setSelectedData(data);
+    setShowTrailer(true);
+  }
   
   return (
     <section className='w-full h-full'>
@@ -67,7 +75,7 @@ const BannerHome = () => {
                   alt={data.title || data.name}
                 />
               </div>
-              {/* button next and previous image */}
+            
               <div className='absolute top-0 w-full h-full hidden items-center justify-between px-4 group-hover:lg:flex'>
                 <button onClick={handlePrev} className='bg-white p-1 rounded-lg text-xl z-10'>
                   <FaAngleLeft />
@@ -87,7 +95,7 @@ const BannerHome = () => {
                   <div className='flex items-center gap-4'>
                     <p>Rating: {data.vote_average.toFixed(1)}</p>
                   </div>
-                  <button className='bg-blue-300 px-4 py-2 text-white font-bold rounded-2xl mt-3 mb-3 drop-shadow-lg hover:bg-gradient-to-l from-red-600 to-orange-500 shadow-md transition-all hover:scale-105'>
+                  <button onClick={() => handleViewTrailer(data)} className='bg-blue-300 px-4 py-2 text-white font-bold rounded-2xl mt-3 mb-3 drop-shadow-lg hover:bg-gradient-to-l from-red-600 to-orange-500 shadow-md transition-all hover:scale-105'>
                     View Trailer
                   </button>
                 </div>
@@ -96,6 +104,11 @@ const BannerHome = () => {
           )
         })}
       </div>
+      {showTrailer && (
+        <Video data={selectedData} media_type={selectedData.media_type || 'movie'} close={() => setShowTrailer(false)} />
+      )
+
+      }
     </section>
   )
 }
