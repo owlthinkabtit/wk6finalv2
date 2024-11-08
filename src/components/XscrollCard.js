@@ -15,7 +15,7 @@ const XscrollCard = ({ data = [], heading, trending, media_type }) => {
 
 	return (
 		<div className='container mx-auto px-3 my-10'>
-			<h2 className='text-white text-xl lg:text-2xl font-bold mb-3'>{heading}</h2>
+			<h2 className='text-white text-xl lg:text-2xl font-bold mb-3 capitalize'>{heading}</h2>
 
 			<div className='relative'>
 				<div className='grid grid-cols-[repeat(auto-fit,230px)] grid-flow-col gap-6 overflow-hidden relative overflow-x-scroll z-10 scroll-smooth transition-all scrollbar-none' ref={containerRef}>
