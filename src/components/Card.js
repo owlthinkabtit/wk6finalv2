@@ -45,13 +45,13 @@ const Card = ({data, trending, index, media_type }) => {
         </div>
       </div>
       <div className="bg-gray-800 p-4 rounded-lg shadow-lg text-white">
-      {/* Cast member's profile picture */}
+     
       <img 
         src={`https://image.tmdb.org/t/p/w200${data.profile_path}`} 
         alt={data.name} 
         className="w-full h-40 object-cover rounded-lg mb-2"
       />
-      {/* Cast member's name and character */}
+      
       <h3 className="text-lg font-bold">{data.name}</h3>
       <p className="text-sm text-gray-400">{data.character}</p>
     </div>
